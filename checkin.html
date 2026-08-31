@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Check-In | Beyond the Branches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body><div class="app">
+<aside class="sidebar"><div class="brand"><div class="brand-mark">✦</div><div><strong>Beyond the Branches</strong><span>your inner growth space</span></div></div>
+<nav><a class="nav-item " href="index.html">⌂ <span>Home</span></a><a class="nav-item active" href="checkin.html">◌ <span>Daily Check-In</span></a><a class="nav-item " href="roots.html">⌁ <span>Root Explorer</span></a><a class="nav-item " href="reflection.html">✎ <span>Reflection</span></a><a class="nav-item " href="letters.html">♡ <span>Letters to Yourself</span></a><a class="nav-item " href="growth.html">♧ <span>Growth Tree</span></a><a class="nav-item " href="insights.html">◔ <span>Insights</span></a></nav><div class="sidebar-note">Small reflections can reveal big patterns.</div></aside>
+<main><header class="topbar"><div><p class="eyebrow">A quiet place to check in</p><h1>Daily Check-In</h1></div>
+<div style="display:flex;align-items:center;gap:10px"><button class="theme-toggle" id="theme-toggle" type="button">◐ <span>Dark mode</span></button><div class="date-pill" id="today"></div></div></header>
+
+<section><div class="section-heading"><p class="eyebrow">DAILY CHECK-IN</p><h2>How are you feeling today?</h2><p>There is no right answer. Just start with what feels true.</p></div>
+<form id="checkin-form" class="card form-card"><div class="form-grid">
+<label>Date<input type="date" id="check-date" required></label>
+<label>Emotion<select id="emotion" required><option value="">Choose an emotion</option><option>Calm</option><option>Happy</option><option>Sad</option><option>Anxious</option><option>Angry</option><option>Overwhelmed</option><option>Lonely</option><option>Hopeful</option><option>Confused</option><option>Grateful</option></select></label>
+<label>Intensity <span id="intensity-value">5</span><input type="range" id="intensity" min="1" max="10" value="5"></label>
+<label>Root Cause<textarea id="root-cause" placeholder="What might be behind this feeling?"></textarea></label>
+<label class="wide">Reflection<textarea id="check-reflection" placeholder="Anything else you want to say about today?"></textarea></label>
+</div><button class="primary" type="submit">Save check-in</button><p id="checkin-status" class="status"></p></form>
+<div class="card table-card"><h3>Recent check-ins</h3><div id="checkin-list"></div></div></section></main></div><script src="common.js"></script>
+<script>
+const checkDate=document.getElementById("check-date"),emotion=document.getElementById("emotion"),intensity=document.getElementById("intensity"),rootCause=document.getElementById("root-cause"),checkReflection=document.getElementById("check-reflection");
+checkDate.value=new Date().toISOString().slice(0,10);intensity.addEventListener("input",e=>document.getElementById("intensity-value").textContent=e.target.value);
+document.getElementById("checkin-form").addEventListener("submit",e=>{e.preventDefault();const d=getData();d.checkins.unshift({date:checkDate.value,emotion:emotion.value,intensity:+intensity.value,root:rootCause.value,reflection:checkReflection.value});saveData(d);e.target.reset();checkDate.value=new Date().toISOString().slice(0,10);intensity.value=5;document.getElementById("intensity-value").textContent=5;document.getElementById("checkin-status").textContent="Saved. Take a breath — you checked in.";renderCheckins()});
+function renderCheckins(){const arr=getData().checkins,box=document.getElementById("checkin-list");if(!arr.length){box.innerHTML='<p style="color:#888;font-size:13px">Your saved check-ins will appear here.</p>';return}box.innerHTML=arr.slice(0,10).map(x=>`<div class="entry"><div>${x.date}</div><div><strong>${esc(x.emotion)}</strong><br><span style="color:#888">${esc(x.reflection||"No reflection")}</span></div><div>Intensity ${x.intensity}/10</div><div>${esc(x.root||"No root cause recorded")}</div></div>`).join("")}
+renderCheckins();
+</script></body></html>

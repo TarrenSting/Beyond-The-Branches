@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Letters to Yourself | Beyond the Branches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body><div class="app">
+<aside class="sidebar"><div class="brand"><div class="brand-mark">✦</div><div><strong>Beyond the Branches</strong><span>your inner growth space</span></div></div>
+<nav><a class="nav-item " href="index.html">⌂ <span>Home</span></a><a class="nav-item " href="checkin.html">◌ <span>Daily Check-In</span></a><a class="nav-item " href="roots.html">⌁ <span>Root Explorer</span></a><a class="nav-item " href="reflection.html">✎ <span>Reflection</span></a><a class="nav-item active" href="letters.html">♡ <span>Letters to Yourself</span></a><a class="nav-item " href="growth.html">♧ <span>Growth Tree</span></a><a class="nav-item " href="insights.html">◔ <span>Insights</span></a></nav><div class="sidebar-note">Small reflections can reveal big patterns.</div></aside>
+<main><header class="topbar"><div><p class="eyebrow">A quiet place to check in</p><h1>Letters to Yourself</h1></div>
+<div style="display:flex;align-items:center;gap:10px"><button class="theme-toggle" id="theme-toggle" type="button">◐ <span>Dark mode</span></button><div class="date-pill" id="today"></div></div></header>
+
+<section><div class="section-heading"><p class="eyebrow">LETTERS TO YOURSELF</p><h2>Write what your heart needs to say.</h2></div>
+<div class="letters-grid">
+<div class="card letter-card"><h3>Letter to Future Self</h3><p>Where do I want to be? What do I hope for?</p><textarea id="future-letter" placeholder="Dear future me..."></textarea><button class="primary save-letter" data-type="future">Save letter</button></div>
+<div class="card letter-card"><h3>Letter to Younger Self</h3><p>What would I tell my younger self today?</p><textarea id="younger-letter" placeholder="Dear younger me..."></textarea><button class="primary save-letter" data-type="younger">Save letter</button></div>
+<div class="card letter-card"><h3>Unsent Letter</h3><p>What do I need to say, but not send?</p><textarea id="unsent-letter" placeholder="I need to say..."></textarea><button class="primary save-letter" data-type="unsent">Save letter</button></div>
+</div></section></main></div><script src="common.js"></script>
+<script>
+const letters=getData().letters;futureLetter.value=letters.future||"";youngerLetter.value=letters.younger||"";unsentLetter.value=letters.unsent||"";
+document.querySelectorAll(".save-letter").forEach(b=>b.addEventListener("click",()=>{const d=getData(),type=b.dataset.type;d.letters[type]=document.getElementById(type+"-letter").value;saveData(d);b.textContent="Saved ✓";setTimeout(()=>b.textContent="Save letter",1200)}));
+</script></body></html>

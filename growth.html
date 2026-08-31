@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth Tree | Beyond the Branches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body><div class="app">
+<aside class="sidebar"><div class="brand"><div class="brand-mark">✦</div><div><strong>Beyond the Branches</strong><span>your inner growth space</span></div></div>
+<nav><a class="nav-item " href="index.html">⌂ <span>Home</span></a><a class="nav-item " href="checkin.html">◌ <span>Daily Check-In</span></a><a class="nav-item " href="roots.html">⌁ <span>Root Explorer</span></a><a class="nav-item " href="reflection.html">✎ <span>Reflection</span></a><a class="nav-item " href="letters.html">♡ <span>Letters to Yourself</span></a><a class="nav-item active" href="growth.html">♧ <span>Growth Tree</span></a><a class="nav-item " href="insights.html">◔ <span>Insights</span></a></nav><div class="sidebar-note">Small reflections can reveal big patterns.</div></aside>
+<main><header class="topbar"><div><p class="eyebrow">A quiet place to check in</p><h1>Growth Tree</h1></div>
+<div style="display:flex;align-items:center;gap:10px"><button class="theme-toggle" id="theme-toggle" type="button">◐ <span>Dark mode</span></button><div class="date-pill" id="today"></div></div></header>
+
+<section><div class="section-heading"><p class="eyebrow">GROWTH TREE</p><h2>Watch your roots and branches grow over time.</h2></div>
+<div class="growth-layout"><div class="card tree-card"><div class="tree-level">Growth level <strong id="growth-level">1</strong></div>
+<div class="big-tree"><div id="tree-canopy">✦</div><div class="tree-trunk">│<br>│<br>│</div><div class="tree-roots">╲  ╱<br> ╲╱</div></div><p id="growth-message">Every reflection adds strength to your roots and branches.</p></div>
+<div class="card milestones"><h3>Your growth markers</h3><div id="milestones"></div></div></div></section></main></div><script src="common.js"></script>
+<script>
+function renderGrowth(){const d=getData(),count=d.checkins.length+d.roots.length+d.reflections.length+Object.values(d.letters).filter(Boolean).length,level=Math.max(1,Math.min(10,Math.floor(count/2)+1));document.getElementById("growth-level").textContent=level;document.getElementById("tree-canopy").textContent=level>=8?"✦ ✦ ✦":level>=5?"✦ ✦":"✦";const ms=[["Roots growing","Begin noticing your feelings",count>=1],["Trunk strengthening","Keep showing up for yourself",count>=3],["Branches expanding","Explore what sits beneath emotions",count>=5],["Leaves appearing","Build a steady reflection habit",count>=8]];document.getElementById("milestones").innerHTML=ms.map(m=>`<div class="milestone ${m[2]?"done":""}">${m[2]?"✓ ":"○ "}${m[0]}<span>${m[1]}</span></div>`).join("")}
+renderGrowth();
+</script></body></html>

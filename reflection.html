@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reflection | Beyond the Branches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body><div class="app">
+<aside class="sidebar"><div class="brand"><div class="brand-mark">✦</div><div><strong>Beyond the Branches</strong><span>your inner growth space</span></div></div>
+<nav><a class="nav-item " href="index.html">⌂ <span>Home</span></a><a class="nav-item " href="checkin.html">◌ <span>Daily Check-In</span></a><a class="nav-item " href="roots.html">⌁ <span>Root Explorer</span></a><a class="nav-item active" href="reflection.html">✎ <span>Reflection</span></a><a class="nav-item " href="letters.html">♡ <span>Letters to Yourself</span></a><a class="nav-item " href="growth.html">♧ <span>Growth Tree</span></a><a class="nav-item " href="insights.html">◔ <span>Insights</span></a></nav><div class="sidebar-note">Small reflections can reveal big patterns.</div></aside>
+<main><header class="topbar"><div><p class="eyebrow">A quiet place to check in</p><h1>Reflection</h1></div>
+<div style="display:flex;align-items:center;gap:10px"><button class="theme-toggle" id="theme-toggle" type="button">◐ <span>Dark mode</span></button><div class="date-pill" id="today"></div></div></header>
+
+<section><div class="section-heading"><p class="eyebrow">REFLECTION</p><h2>Take a moment to write what is in your mind.</h2></div>
+<div class="card form-card reflection-form"><label>What is this feeling trying to tell me?<textarea id="r1"></textarea></label>
+<label>What do I need the most right now?<textarea id="r2"></textarea></label><label>What is within my control today?<textarea id="r3"></textarea></label><label>Add anything else you want?<textarea id="r4"></textarea></label>
+<button class="primary" id="save-reflection">Save reflection</button><p id="reflection-status" class="status"></p></div></section></main></div><script src="common.js"></script>
+<script>
+document.getElementById("save-reflection").addEventListener("click",()=>{const d=getData();d.reflections.unshift({date:new Date().toISOString().slice(0,10),answers:[r1.value,r2.value,r3.value,r4.value]});saveData(d);document.getElementById("reflection-status").textContent="Reflection saved. Your roots just grew a little stronger.";[r1,r2,r3,r4].forEach(x=>x.value="")});
+</script></body></html>
