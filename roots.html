@@ -1,19 +1,105 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Root Explorer | Beyond the Branches</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css"></head><body><div class="app">
-<aside class="sidebar"><div class="brand"><div class="brand-mark">✦</div><div><strong>Beyond the Branches</strong><span>your inner growth space</span></div></div>
-<nav><a class="nav-item " href="index.html">⌂ <span>Home</span></a><a class="nav-item " href="checkin.html">◌ <span>Daily Check-In</span></a><a class="nav-item active" href="roots.html">⌁ <span>Root Explorer</span></a><a class="nav-item " href="reflection.html">✎ <span>Reflection</span></a><a class="nav-item " href="letters.html">♡ <span>Letters to Yourself</span></a><a class="nav-item " href="growth.html">♧ <span>Growth Tree</span></a><a class="nav-item " href="insights.html">◔ <span>Insights</span></a></nav><div class="sidebar-note">Small reflections can reveal big patterns.</div></aside>
-<main><header class="topbar"><div><p class="eyebrow">A quiet place to check in</p><h1>Root Explorer</h1></div>
-<div style="display:flex;align-items:center;gap:10px"><button class="theme-toggle" id="theme-toggle" type="button">◐ <span>Dark mode</span></button><div class="date-pill" id="today"></div></div></header>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Root Explorer | Beyond the Branches</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">✦</div>
+        <div>
+          <strong>Beyond the Branches</strong>
+          <span>your inner growth space</span>
+        </div>
+      </div>
+      <nav>
+        <a class="nav-item" href="index.html">⌂ <span>Home</span></a>
+        <a class="nav-item" href="checkin.html">◌ <span>Daily Check-In</span></a>
+        <a class="nav-item active" href="roots.html">⌁ <span>Root Explorer</span></a>
+        <a class="nav-item" href="reflection.html">✎ <span>Reflection</span></a>
+        <a class="nav-item" href="letters.html">♡ <span>Letters to Yourself</span></a>
+        <a class="nav-item" href="growth.html">♧ <span>Growth Tree</span></a>
+        <a class="nav-item" href="insights.html">◔ <span>Insights</span></a>
+      </nav>
+      <div class="sidebar-note">Small reflections can reveal big patterns.</div>
+    </aside>
 
-<section><div class="section-heading"><p class="eyebrow">ROOT EXPLORER</p><h2>Let's look beneath the feeling.</h2></div>
-<div class="card form-card"><label>Emotion<select id="root-emotion"><option value="">Choose an emotion</option><option>Sadness</option><option>Anxiety</option><option>Anger</option><option>Loneliness</option><option>Overwhelm</option><option>Fear</option><option>Joy</option><option>Other</option></select></label>
-<label>What might be beneath this feeling?<textarea id="root-beneath" placeholder="Maybe there is a need, fear, memory, expectation, or situation underneath it..."></textarea></label>
-<label>What does this feeling need right now?<textarea id="root-need" placeholder="Rest? reassurance? boundaries? connection? action?"></textarea></label>
-<button class="primary" id="save-root">Save exploration</button><p id="root-status" class="status"></p></div></section></main></div><script src="common.js"></script>
-<script>
-document.getElementById("save-root").addEventListener("click",()=>{const d=getData();d.roots.unshift({emotion:document.getElementById("root-emotion").value,beneath:document.getElementById("root-beneath").value,need:document.getElementById("root-need").value,date:new Date().toISOString().slice(0,10)});saveData(d);document.getElementById("root-status").textContent="Exploration saved.";document.getElementById("root-beneath").value="";document.getElementById("root-need").value=""});
-</script></body></html>
+    <!-- Main content -->
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">A quiet place to check in</p>
+          <h1>Root Explorer</h1>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <button class="theme-toggle" id="theme-toggle" type="button">◐ <span>Dark mode</span></button>
+          <div class="date-pill" id="today"></div>
+        </div>
+      </header>
+
+      <section>
+        <div class="section-heading">
+          <p class="eyebrow">ROOT EXPLORER</p>
+          <h2>Let's look beneath the feeling.</h2>
+        </div>
+
+        <div class="card form-card">
+          <label>
+            Emotion
+            <select id="root-emotion">
+              <option value="">Choose an emotion</option>
+              <option>Sadness</option>
+              <option>Anxiety</option>
+              <option>Anger</option>
+              <option>Loneliness</option>
+              <option>Overwhelm</option>
+              <option>Fear</option>
+              <option>Joy</option>
+              <option>Other</option>
+            </select>
+          </label>
+
+          <label>
+            What might be beneath this feeling?
+            <textarea id="root-beneath" placeholder="Maybe there is a need, fear, memory, expectation, or situation underneath it..."></textarea>
+          </label>
+
+          <label>
+            What does this feeling need right now?
+            <textarea id="root-need" placeholder="Rest? reassurance? boundaries? connection? action?"></textarea>
+          </label>
+
+          <button class="primary" id="save-root">Save exploration</button>
+          <p id="root-status" class="status"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="common.js"></script>
+  <script>
+    document.getElementById("save-root").addEventListener("click", () => {
+      const data = getData();
+      data.roots.unshift({
+        emotion: document.getElementById("root-emotion").value,
+        beneath: document.getElementById("root-beneath").value,
+        need: document.getElementById("root-need").value,
+        date: new Date().toISOString().slice(0, 10)
+      });
+      saveData(data);
+
+      document.getElementById("root-status").textContent = "Exploration saved.";
+      document.getElementById("root-beneath").value = "";
+      document.getElementById("root-need").value = "";
+    });
+  </script>
+</body>
+</html>
