@@ -1,18 +1,378 @@
+```html
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insights | Beyond the Branches</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css"></head><body><div class="app">
-<aside class="sidebar"><div class="brand"><div class="brand-mark">✦</div><div><strong>Beyond the Branches</strong><span>your inner growth space</span></div></div>
-<nav><a class="nav-item " href="index.html">⌂ <span>Home</span></a><a class="nav-item " href="checkin.html">◌ <span>Daily Check-In</span></a><a class="nav-item " href="roots.html">⌁ <span>Root Explorer</span></a><a class="nav-item " href="reflection.html">✎ <span>Reflection</span></a><a class="nav-item " href="letters.html">♡ <span>Letters to Yourself</span></a><a class="nav-item " href="growth.html">♧ <span>Growth Tree</span></a><a class="nav-item active" href="insights.html">◔ <span>Insights</span></a></nav><div class="sidebar-note">Small reflections can reveal big patterns.</div></aside>
-<main><header class="topbar"><div><p class="eyebrow">A quiet place to check in</p><h1>Insights</h1></div>
-<div style="display:flex;align-items:center;gap:10px"><button class="theme-toggle" id="theme-toggle" type="button">◐ <span>Dark mode</span></button><div class="date-pill" id="today"></div></div></header>
+<html lang="en">
 
-<section><div class="section-heading"><p class="eyebrow">INSIGHTS</p><h2>Your patterns, at a glance.</h2></div>
-<div class="insight-grid"><div class="card stat"><span>Check-ins</span><strong id="stat-checkins">0</strong></div><div class="card stat"><span>Average intensity</span><strong id="stat-intensity">—</strong></div><div class="card stat"><span>Top emotion</span><strong id="stat-emotion">—</strong></div></div>
-<div class="card pattern-card"><h3>What keeps returning?</h3><div id="pattern-content"></div><p class="quote">Patterns help you notice what your mind keeps returning to.</p></div></section></main></div><script src="common.js"></script>
-<script>
-function renderInsights(){const arr=getData().checkins;document.getElementById("stat-checkins").textContent=arr.length;document.getElementById("stat-intensity").textContent=arr.length?(arr.reduce((a,b)=>a+b.intensity,0)/arr.length).toFixed(1):"—";const counts={};arr.forEach(x=>counts[x.emotion]=(counts[x.emotion]||0)+1);const top=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];document.getElementById("stat-emotion").textContent=top?top[0]:"—";const box=document.getElementById("pattern-content");if(!top){box.innerHTML='<p style="color:#888;font-size:13px">Complete a few check-ins and your patterns will begin to appear here.</p>';return}box.innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([e,n])=>`<div class="pattern-row"><span>${esc(e)}</span><strong>${n} check-in${n===1?"":"s"}</strong></div>`).join("")}
-renderInsights();
-</script></body></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Insights | Beyond the Branches</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ==================================================
+             Sidebar
+        =================================================== -->
+
+        <aside class="sidebar">
+
+            <!-- Brand -->
+            <div class="brand">
+
+                <div class="brand-mark">
+                    ✦
+                </div>
+
+                <div>
+                    <strong>Beyond the Branches</strong>
+                    <span>your inner growth space</span>
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+            <nav>
+
+                <a class="nav-item" href="index.html">
+                    ⌂
+                    <span>Home</span>
+                </a>
+
+                <a class="nav-item" href="checkin.html">
+                    ◌
+                    <span>Daily Check-In</span>
+                </a>
+
+                <a class="nav-item" href="roots.html">
+                    ⌁
+                    <span>Root Explorer</span>
+                </a>
+
+                <a class="nav-item" href="reflection.html">
+                    ✎
+                    <span>Reflection</span>
+                </a>
+
+                <a class="nav-item" href="letters.html">
+                    ♡
+                    <span>Letters to Yourself</span>
+                </a>
+
+                <a class="nav-item" href="growth.html">
+                    ♧
+                    <span>Growth Tree</span>
+                </a>
+
+                <a class="nav-item active" href="insights.html">
+                    ◔
+                    <span>Insights</span>
+                </a>
+
+            </nav>
+
+
+            <!-- Sidebar Note -->
+            <div class="sidebar-note">
+                Small reflections can reveal big patterns.
+            </div>
+
+        </aside>
+
+
+        <!-- ==================================================
+             Main Content
+        =================================================== -->
+
+        <main>
+
+            <!-- Top Bar -->
+            <header class="topbar">
+
+                <div>
+                    <p class="eyebrow">
+                        A quiet place to check in
+                    </p>
+
+                    <h1>
+                        Insights
+                    </h1>
+                </div>
+
+
+                <!-- Theme + Date -->
+                <div
+                    style="
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    "
+                >
+
+                    <!-- Dark Mode Toggle -->
+                    <button
+                        class="theme-toggle"
+                        id="theme-toggle"
+                        type="button"
+                    >
+                        ◐
+                        <span>Dark mode</span>
+                    </button>
+
+                    <!-- Current Date -->
+                    <div
+                        class="date-pill"
+                        id="today"
+                    ></div>
+
+                </div>
+
+            </header>
+
+
+            <!-- ==================================================
+                 Insights Section
+            =================================================== -->
+
+            <section>
+
+                <!-- Section Heading -->
+                <div class="section-heading">
+
+                    <p class="eyebrow">
+                        INSIGHTS
+                    </p>
+
+                    <h2>
+                        Your patterns, at a glance.
+                    </h2>
+
+                </div>
+
+
+                <!-- ==================================================
+                     Statistics
+                =================================================== -->
+
+                <div class="insight-grid">
+
+                    <!-- Total Check-Ins -->
+                    <div class="card stat">
+
+                        <span>
+                            Check-ins
+                        </span>
+
+                        <strong id="stat-checkins">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Average Intensity -->
+                    <div class="card stat">
+
+                        <span>
+                            Average intensity
+                        </span>
+
+                        <strong id="stat-intensity">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Top Emotion -->
+                    <div class="card stat">
+
+                        <span>
+                            Top emotion
+                        </span>
+
+                        <strong id="stat-emotion">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================================
+                     Pattern Card
+                =================================================== -->
+
+                <div class="card pattern-card">
+
+                    <h3>
+                        What keeps returning?
+                    </h3>
+
+                    <div id="pattern-content"></div>
+
+                    <p class="quote">
+                        Patterns help you notice what your mind keeps
+                        returning to.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ==================================================
+         Common JavaScript
+    =================================================== -->
+
+    <script src="common.js"></script>
+
+
+    <!-- ==================================================
+         Insights JavaScript
+    =================================================== -->
+
+    <script>
+
+        // --------------------------------------------------
+        // Render Insights
+        // --------------------------------------------------
+
+        function renderInsights() {
+
+            const checkins = getData().checkins;
+
+
+            // --------------------------------------------------
+            // Total Check-Ins
+            // --------------------------------------------------
+
+            document.getElementById("stat-checkins").textContent =
+                checkins.length;
+
+
+            // --------------------------------------------------
+            // Average Intensity
+            // --------------------------------------------------
+
+            const averageIntensity = checkins.length
+                ? (
+                    checkins.reduce(
+                        (total, checkin) =>
+                            total + checkin.intensity,
+                        0
+                    ) / checkins.length
+                ).toFixed(1)
+                : "—";
+
+            document.getElementById("stat-intensity").textContent =
+                averageIntensity;
+
+
+            // --------------------------------------------------
+            // Count Emotions
+            // --------------------------------------------------
+
+            const emotionCounts = {};
+
+            checkins.forEach((checkin) => {
+
+                emotionCounts[checkin.emotion] =
+                    (emotionCounts[checkin.emotion] || 0) + 1;
+
+            });
+
+
+            // --------------------------------------------------
+            // Find Most Common Emotion
+            // --------------------------------------------------
+
+            const topEmotion = Object
+                .entries(emotionCounts)
+                .sort((a, b) => b[1] - a[1])[0];
+
+
+            document.getElementById("stat-emotion").textContent =
+                topEmotion
+                    ? topEmotion[0]
+                    : "—";
+
+
+            // --------------------------------------------------
+            // Pattern Content
+            // --------------------------------------------------
+
+            const patternContent =
+                document.getElementById("pattern-content");
+
+
+            // No check-ins yet
+            if (!topEmotion) {
+
+                patternContent.innerHTML = `
+                    <p style="color: #888; font-size: 13px;">
+                        Complete a few check-ins and your patterns
+                        will begin to appear here.
+                    </p>
+                `;
+
+                return;
+            }
+
+
+            // Display emotion patterns
+            patternContent.innerHTML = Object
+                .entries(emotionCounts)
+                .sort((a, b) => b[1] - a[1])
+                .map(([emotion, count]) => `
+
+                    <div class="pattern-row">
+
+                        <span>
+                            ${esc(emotion)}
+                        </span>
+
+                        <strong>
+                            ${count}
+                            check-in${count === 1 ? "" : "s"}
+                        </strong>
+
+                    </div>
+
+                `)
+                .join("");
+        }
+
+
+        // --------------------------------------------------
+        // Initial Page Load
+        // --------------------------------------------------
+
+        renderInsights();
+
+    </script>
+
+</body>
+
+</html>
+```
